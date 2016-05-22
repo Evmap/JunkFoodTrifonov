@@ -1,6 +1,9 @@
+
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -45,10 +48,22 @@ public class Tests {
         assertNotNull(new Tests());
         //Проверка на пустоту
         assertNull(null);
-        //Order создан, заранее заготовлен в методе prepare. Проверим его на не пустоту. Отрабатывает ли prepare???
-        assertNotNull(o);
+        // //Order создан, заранее заготовлен в методе prepare. Проверим его на не пустоту. Отрабатывает ли prepare???
+        //assertNotNull(o);
     }
 
+    @Test
+    public void testOrder() {
+        Meal testMeal1 = new Meal("Meal1");
+        Meal fakeMeal = new Meal("FakeMeal");
+        assertFalse(new Order().addMeal(fakeMeal));
+        assertTrue(new Order().addMeal(testMeal1,2));
+    }
+
+    public void testMeal() {
+        assertNotNull(new Meal());
+        assertEquals(new Meal("Meal1").getTitle(),"Meal1");
+    }
 
     /**
      * Этот тест всегда проваливается. Пример реакции системы Unit Testing в случае некорректной реализации.
@@ -66,6 +81,6 @@ public class Tests {
     */
     @Test(expected= IllegalArgumentException.class)
     public void testNotInPrice(){
-        new Order().addMeal(new Meal());
+        new Order().addMeal(new Meal("New Meal"));
     }
 }
